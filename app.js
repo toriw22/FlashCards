@@ -105,11 +105,17 @@ function pullQuestions(filename) {
 	});
 };
 
-console.log("It is Player 1's turn to create the flashcards.");
-newCards.newBasicCards().then(function() {
-	newClozeCards.newClozeCards().then(function(){
-	console.log("Now it is Player 2's turn to answer the flashcards.");
-	pullQuestions("flashcards.txt");
+fs.writeFile("flashcards.txt", " ", function(err) {
+  if (err) {
+  	return console.log(err);
+  }
+	console.log("It is Player 1's turn to create the flashcards.");
+		newCards.newBasicCards().then(function() {
+			newClozeCards.newClozeCards().then(function(){
+			console.log("Now it is Player 2's turn to answer the flashcards.");
+			pullQuestions("flashcards.txt");
+	
+});
 });
 }); 
 
