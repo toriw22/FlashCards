@@ -81,7 +81,7 @@ function pullQuestions(filename) {
 					console.log("That is incorrect! " + frontBack[number] + " " + frontBack[number-=1]);
 				};
 			};	
-			
+			// =====a for loop doesn't work here because the number is manipulated at the end of each function====
 			checking(num);
 			num+=2;
 			checking(num);
