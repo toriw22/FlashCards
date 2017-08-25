@@ -1,25 +1,15 @@
 var fs = require("fs");
 var inquirer = require("inquirer");
 
-function AddCards(question, answer) {
-	this.question = question;
-	this.answer = answer;
-}
+
+console.log("Player 1 begins by entering flashcard data.");
 
 function AppendTxtFile(question, answer) { 
-	fs.appendFile("basiccards.txt", question + " , " + answer + " , ", function (err){
+	fs.appendFile("flashcards.txt", answer + " , " + question + " , ", function (err){
 		if (err) {
-			return console.log(err);
+			console.log(err);
+			return err;
 		}
-
-	});
-};
-function readTxtFile() { 
-	fs.readFile("basiccards.txt", "utf8", function (err, data) {
-		if (err) {
-			return console.log (err);
-		}
-		console.log(data);
 
 	});
 };
@@ -28,24 +18,66 @@ function createCardPrompt () {
 	return inquirer.prompt ([
 		{
 			type: "input",
-			name: "question",
+			name: "question[0]",
 			message: "To create a flashcard, please enter a question."
 			 
 		},
 		{
 			type: "input",
-			name: "answer",
+			name: "answer[0]",
+			message: "To complete a flashcard, please answer the question."
+		},
+		{
+			type: "input",
+			name: "question[1]",
+			message: "To create a flashcard, please enter a question."
+			 
+		},
+		{
+			type: "input",
+			name: "answer[1]",
+			message: "To complete a flashcard, please answer the question."
+		},
+		{
+			type: "input",
+			name: "question[2]",
+			message: "To create a flashcard, please enter a question."
+			 
+		},
+		{
+			type: "input",
+			name: "answer[2]",
+			message: "To complete a flashcard, please answer the question."
+		},
+		{
+			type: "input",
+			name: "question[3]",
+			message: "To create a flashcard, please enter a question."
+			 
+		},
+		{
+			type: "input",
+			name: "answer[3]",
+			message: "To complete a flashcard, please answer the question."
+		},
+		{
+			type: "input",
+			name: "question[4]",
+			message: "To create a flashcard, please enter a question."
+			 
+		},
+		{
+			type: "input",
+			name: "answer[4]",
 			message: "To complete a flashcard, please answer the question."
 		}
 
 	]).then(function(flashcards){
-		var newCard = new AddCards(flashcards.question, flashcards.answer);
-		var appending = new AppendTxtFile(flashcards.question, flashcards.answer);
-		
+		for (i = 0; i < 5; i++) {
+			var appending = new AppendTxtFile(flashcards.answer[i], flashcards.question[i]);
+		};
 	});
 
 };
 
 createCardPrompt ();
-
-// module.exports

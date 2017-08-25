@@ -1,54 +1,81 @@
 var fs = require("fs");
 var inquirer = require ("inquirer");
 
-var cardNumber = 1;
-
-function AddClozeCards(cardNum, front, back) {
-	this.cardNum = cardNum;
-	this.front = front;
-	this.back = back;
-	this.whole = this.back + this.front;
-	this.partial = "__________" + this.front;
-	cardNum++;
-	return console.log(cardNum);
-
-};
-
 function AppendClozeTxtFile(front, back) { 
-	fs.appendFile("clozecards.txt", back + " , " + front + " , ", function (err){
+	fs.appendFile("flashcards.txt", back + " , " + front + " , ", function (err){
 		if (err) {
-			return console.log(err);
+			console.log(err);
+			return err;
 		}
 
 	});
 };
 
 function createClozeCardPrompt () { 
+	
 	return inquirer.prompt ([
 		{
 			type: "input",
-			name: "back",
+			name: "back[0]",
 			message: "To create a cloze flashcard, please enter a key term (ex: name, date, etc.)"
 			 
 		},
 		{
 			type: "input",
-			name: "front",
+			name: "front[0]",
+			message: "To complete a cloze flashcard, please enter a partial statement which applies to the key term (ex: important fact, definition, etc.)"
+		},
+		{
+			type: "input",
+			name: "back[1]",
+			message: "To create a cloze flashcard, please enter a key term (ex: name, date, etc.)"
+			 
+		},
+		{
+			type: "input",
+			name: "front[1]",
+			message: "To complete a cloze flashcard, please enter a partial statement which applies to the key term (ex: important fact, definition, etc.)"
+		},
+		{
+			type: "input",
+			name: "back[2]",
+			message: "To create a cloze flashcard, please enter a key term (ex: name, date, etc.)"
+			 
+		},
+		{
+			type: "input",
+			name: "front[2]",
+			message: "To complete a cloze flashcard, please enter a partial statement which applies to the key term (ex: important fact, definition, etc.)"
+		},
+		{
+			type: "input",
+			name: "back[3]",
+			message: "To create a cloze flashcard, please enter a key term (ex: name, date, etc.)"
+			 
+		},
+		{
+			type: "input",
+			name: "front[3]",
+			message: "To complete a cloze flashcard, please enter a partial statement which applies to the key term (ex: important fact, definition, etc.)"
+		},
+		{
+			type: "input",
+			name: "back[4]",
+			message: "To create a cloze flashcard, please enter a key term (ex: name, date, etc.)"
+			 
+		},
+		{
+			type: "input",
+			name: "front[4]",
 			message: "To complete a cloze flashcard, please enter a partial statement which applies to the key term (ex: important fact, definition, etc.)"
 		}
 
 	]).then(function(flashcards){
-		var newCard = new AddClozeCards(cardNumber, flashcards.back, flashcards.front);
-		var appending = new AppendClozeTxtFile(flashcards.back, flashcards.front);
-		
+		for (i = 0; i < 5; i++) {
+			var appending = new AppendClozeTxtFile(flashcards.back[i], flashcards.front[i]);	
+		}
 	});
-
-	if (cardNumber <= 4) { 
-		createClozeCardPrompt ();
-	}
-
+	
 };
 
 createClozeCardPrompt ();
-
-// module.exports = clozecards;
