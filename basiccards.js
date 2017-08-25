@@ -80,4 +80,4 @@ function createCardPrompt () {
 
 };
 
-createCardPrompt ();
+module.exports.newBasicCards = createCardPrompt;

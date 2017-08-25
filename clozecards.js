@@ -78,4 +78,4 @@ function createClozeCardPrompt () {
 	
 };
 
-createClozeCardPrompt ();
+module.exports.newClozeCards = createClozeCardPrompt;

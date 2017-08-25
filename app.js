@@ -1,13 +1,9 @@
 var fs = require("fs");
 var inquirer = require("inquirer");
 var num = 1;
+var newCards = require("./basicCards");
+var newClozeCards = require("./clozeCards");
 
-console.log("It is Player 1's turn to create the flashcards.");
-// var newCards = require("./basicCards");
-// var newClozeCards = require("./clozeCards");
-
-
-console.log("Now it is Player 2's turn to answer the flashcards.");
 
 function pullQuestions(filename) { 
 	fs.readFile(filename, "utf8", function (err, data) {
@@ -15,7 +11,7 @@ function pullQuestions(filename) {
 			return console.log (err);
 		}
 		var frontBack = data.split(" , ");
-		inquirer.prompt([ 
+		return inquirer.prompt([ 
 			{
 				type: "input",
 				name: "answer[1]",
@@ -109,8 +105,13 @@ function pullQuestions(filename) {
 	});
 };
 
-pullQuestions("flashcards.txt");
-
+console.log("It is Player 1's turn to create the flashcards.");
+newCards.newBasicCards().then(function() {
+	newClozeCards.newClozeCards().then(function(){
+	console.log("Now it is Player 2's turn to answer the flashcards.");
+	pullQuestions("flashcards.txt");
+});
+}); 
 
 
 
